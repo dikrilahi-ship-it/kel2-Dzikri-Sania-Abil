@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('home.app.css') }}">
 </head>
 <body>
+  <nav class="navbar">
+    <a href="/home">Home</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+</nav>
 
     <div class="container">
 
