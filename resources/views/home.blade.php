@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Home - Laravel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Pengenalan Laravel</title>
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.app.css') }}">
 </head>
 <body>
 
@@ -11,39 +13,32 @@
 
         <h1>Selamat Datang di Website Pengenalan Laravel</h1>
 
-        <p>
-            Website ini dibuat sebagai tugas pembelajaran Framework Laravel.
-            Melalui website ini, pengguna dapat mengenal apa itu Laravel,
-            fungsi Laravel, serta manfaatnya dalam pengembangan aplikasi web.
+        <p class="intro">
+            Website ini dibuat sebagai media pembelajaran Framework Laravel.
+            Melalui website ini, pengguna dapat mengenal Laravel, memahami
+            kegunaannya, dan mempelajari konsep dasar pengembangan web.
         </p>
 
-        <h2>Tentang Website</h2>
+        <div class="card">
+            <h2>Tentang Website</h2>
+            <p>
+                Website ini terdiri dari beberapa halaman yang menjelaskan
+                informasi mengenai Laravel serta profil pembuat website.
+            </p>
+        </div>
 
-        <p>
-            Website ini terdiri dari beberapa halaman, yaitu Home, About, dan Contact.
-            Setiap halaman memiliki informasi yang berbeda untuk membantu pengguna
-            memahami framework Laravel dengan lebih mudah.
-        </p>
+        <div class="card">
+            <h2>Tujuan Website</h2>
+            <ul>
+                <li>Mempelajari Framework Laravel.</li>
+                <li>Memahami konsep Route, Controller, dan View.</li>
+                <li>Memenuhi tugas mata kuliah Pemrograman Web.</li>
+                <li>Melatih kerja sama dalam pengembangan website.</li>
+            </ul>
+        </div>
 
-        <h2>Tujuan Pembuatan Website</h2>
-
-        <ul>
-            <li>Memenuhi tugas mata kuliah Pemrograman Web.</li>
-            <li>Mempelajari penggunaan Framework Laravel.</li>
-            <li>Memahami konsep Route, Controller, dan View.</li>
-            <li>Melatih kerja sama tim dalam pengembangan website.</li>
-        </ul>
-
-        <h2>Fitur Website</h2>
-
-        <ul>
-            <li>Halaman Home sebagai halaman utama.</li>
-            <li>Halaman About yang berisi pengenalan Laravel.</li>
-            <li>Halaman Contact yang berisi informasi kelompok.</li>
-        </ul>
-
-        <div class="footer">
-            <p>&copy; 2026 Website Pengenalan Laravel</p>
+        <div class="button-container">
+            <a href="/about" class="btn">Lanjut ke About →</a>
         </div>
 
     </div>
