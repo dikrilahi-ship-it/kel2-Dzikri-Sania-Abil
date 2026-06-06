@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Pengenalan Laravel</title>
 
-    <link rel="stylesheet" href="{{ asset('css/home.app.css') }}">
+    <link rel="stylesheet" href="{{ asset('home.app.css') }}">
 </head>
 <body>
 
