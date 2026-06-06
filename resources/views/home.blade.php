@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="{{ asset('home.app.css') }}">
 </head>
 <body>
-  <nav class="navbar">
+
+    <nav class="navbar">
     <a href="/home">Home</a>
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
@@ -40,13 +41,6 @@
                 <li>Memenuhi tugas mata kuliah Pemrograman Web.</li>
                 <li>Melatih kerja sama dalam pengembangan website.</li>
             </ul>
-        </div>
-
-        <div class="button-container">
-            <a href="/about" class="btn">Lanjut ke About →</a>
-        </div>
-
-    </div>
 
 </body>
 </html>
