@@ -132,12 +132,9 @@
             margin-bottom: 30px;
             border: 1px solid var(--border-color);
             transition: var(--transition-smooth);
-            /* Pastikan tidak ada transform mengambang di sini */
         }
 
         .card:hover {
-            /* HAPUS: transform: translateY(-4px); */
-            /* Cukup ganti warna border dan bayangan sedikit lebih tegas agar terasa interaktif */
             border-color: rgba(59, 130, 246, 0.5);
             box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 8px 15px -6px rgba(15, 23, 42, 0.08);
         }
@@ -249,8 +246,6 @@
         }
 
         .btn:hover {
-            /* HAPUS: transform: translateY(-2px) scale(1.02); */
-            /* Cukup ganti sedikit bayangan agar terasa ditekan/aktif */
             box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
             color: #ffffff;
         }
@@ -371,7 +366,7 @@
     </div>
 
     <div class="footer">
-        Dibuat untuk pembelajaran Laravel🚀
+        Dibuat untuk pembelajaran Laravel • Premium UI Design 🚀
     </div>
 
 </body>

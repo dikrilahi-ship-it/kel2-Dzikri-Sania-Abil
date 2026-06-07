@@ -9,6 +9,12 @@
 </head>
 <body>
 
+    <nav class="navbar">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </nav>
+
     <div class="container">
 
         <h1>Selamat Datang di Website Pengenalan Laravel</h1>
@@ -35,10 +41,6 @@
                 <li>Memenuhi tugas mata kuliah Pemrograman Web.</li>
                 <li>Melatih kerja sama dalam pengembangan website.</li>
             </ul>
-        </div>
-
-        <div class="button-container">
-            <a href="/about" class="btn">Lanjut ke About →</a>
         </div>
 
     </div>
