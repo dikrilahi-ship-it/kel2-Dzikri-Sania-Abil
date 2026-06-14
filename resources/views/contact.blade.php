@@ -22,8 +22,7 @@
                 Hubungi Kelompok <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Kami</span>
             </h1>
             <p class="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                Silakan tinggalkan pesan melalui formulir interaktif di bawah ini untuk menguji fungsionalitas pengiriman data Controller ke Database Server.
-            </p>
+                Silakan tinggalkan masukan atau feedback kamu melalui formulir di bawah ini. Setiap saran yang kamu berikan sangat berarti untuk menguji fungsionalitas pengiriman data dari website langsung ke database server kami.
         </div>
     </header>
 
@@ -36,15 +35,15 @@
                 <div class="space-y-4 text-xs sm:text-sm">
                     <div>
                         <span class="block text-slate-500 font-medium">Nama Tim:</span>
-                        <span class="font-bold text-white">Kelompok 2 - Web Pro</span>
+                        <span class="font-bold text-white">Kelompok 2 - Tsania, Dzikri, Abil</span>
                     </div>
                     <div>
                         <span class="block text-slate-500 font-medium">Email Kelompok:</span>
-                        <span class="font-bold text-slate-300">kelompok2@example.com</span>
+                        <span class="font-bold text-slate-300">kelompok2@gmail.com</span>
                     </div>
                     <div>
                         <span class="block text-slate-500 font-medium">WhatsApp Official:</span>
-                        <span class="font-bold text-slate-300">+62 812-3456-7890</span>
+                        <span class="font-bold text-slate-300">+62 815-1138-0921</span>
                     </div>
                 </div>
             </div>
