@@ -9,7 +9,6 @@
 <body class="bg-slate-900 text-slate-100 antialiased font-sans min-h-screen flex flex-col selection:bg-red-500 selection:text-white">
 
     @include('layouts.navbar')
-
     <header class="relative overflow-hidden text-center pt-28 pb-24 px-4 bg-radial from-indigo-950 via-slate-950 to-slate-950 w-full">
         <div class="absolute top-[-20%] left-[20%] w-[40rem] h-[40rem] bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute bottom-[-10%] right-[10%] w-[35rem] h-[35rem] bg-red-500/10 rounded-full blur-3xl pointer-events-none"></div>

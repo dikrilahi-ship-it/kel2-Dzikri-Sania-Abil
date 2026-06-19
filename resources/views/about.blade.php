@@ -33,7 +33,6 @@
     <main class="max-w-6xl mx-auto px-6 pb-24 flex-grow w-full">
         
         <div class="bg-gradient-to-br from-slate-850 to-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-lg mb-12 relative overflow-hidden group">
-            <div class="absolute top-0 left-0 w-2 h-full bg-blue-500"></div>
             <h2 class="text-xl sm:text-2xl font-black text-white mb-4 flex items-center gap-2">
                 💡 Konsep Dasar Laravel
             </h2>

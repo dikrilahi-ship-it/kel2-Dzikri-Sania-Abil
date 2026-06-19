@@ -11,7 +11,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Memaksa user yang belum login untuk pergi ke halaman login
+        $middleware->redirectTo(fn () => route('login'));
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

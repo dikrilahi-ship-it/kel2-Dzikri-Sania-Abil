@@ -47,13 +47,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="bg-gradient-to-br from-indigo-950/50 to-slate-900 border border-indigo-900/30 p-6 rounded-2xl">
-                <h4 class="text-xs font-bold text-white mb-2">📌 Catatan Validasi:</h4>
-                <p class="text-[11px] text-slate-400 leading-relaxed">
-                    Formulir di sebelah kanan sudah mengadopsi sistem keamanan **Tokens CSRF** bawaan Laravel untuk mencegah manipulasi form dari luar.
-                </p>
-            </div>
         </div>
 
         <div class="md:col-span-3 bg-gradient-to-br from-slate-850 to-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl">
