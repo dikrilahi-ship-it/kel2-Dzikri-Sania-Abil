@@ -7,30 +7,45 @@ use App\Models\Contact; // <-- Ini penting untuk memanggil si Asisten Model kita
 
 class ContactController extends Controller
 {
-    // Fungsi untuk menampilkan halaman form contact
+// 1. READ: Menampilkan semua data kontak
     public function index()
     {
-        return view('contact');
+        $contacts = Contact::all();
+        return view('contacts.index', compact('contacts'));
     }
 
-    // Fungsi untuk memproses dan menyimpan data form ke Navicat
+    // Menampilkan halaman form tambah kontak
+    public function create()
+    {
+        return view('contacts.create');
+    }
+
+    // 2. CREATE: Memproses dan menyimpan data dari form ke database
     public function store(Request $request)
     {
-        // 1. Validasi data agar form wajib diisi
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'message' => 'required',
+        // Validasi data agar form wajib diisi sesuai kolom baru
+       $request->validate([
+    'nama' => 'required', // Ganti 'name' menjadi 'nama' agar sesuai dengan form
+    'nomor_telepon' => 'required',
+    'biodata' => 'nullable',
         ]);
 
-        // 2. Simpan data ke database Navicat
-        Contact::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'message' => $request->message,
-        ]);
+        // Simpan data ke database
+        // Simpan data ke database
+Contact::create([
+    'name_kontak' => $request->nama,          // Memasukkan input 'nama' ke kolom 'name_kontak'
+    'email'       => $request->nomor_telepon, // Memasukkan input 'nomor_telepon' ke kolom 'email'
+    'message'     => $request->biodata,       // Memasukkan input 'biodata' ke kolom 'message'
+]);
 
-        // 3. Kembali ke halaman contact dengan pesan sukses
-        return redirect()->back()->with('success', 'Pesan kamu berhasil dikirim ke database!');
+        // Kembali ke halaman utama contacts dengan pesan sukses
+    return redirect()->route('contacts.index')->with('success', 'Kontak berhasil ditambahkan!');
     }
+ public function destroy($id)
+{
+    $contact = \App\Models\Contact::findOrFail($id);
+    $contact->delete();
+
+    return redirect()->route('contacts.index')->with('success', 'Kontak berhasil dihapus!');
+}
 }
