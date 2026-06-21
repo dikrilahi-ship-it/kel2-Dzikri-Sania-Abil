@@ -81,3 +81,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+use App\Http\Controllers\ContactController;
+
+Route::resource('contacts', ContactController::class);
