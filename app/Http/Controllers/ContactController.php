@@ -22,22 +22,24 @@ class ContactController extends Controller
 
     // 2. CREATE: Memproses dan menyimpan data dari form ke database
     public function store(Request $request)
-    {
-        // Validasi data agar form wajib diisi sesuai kolom baru
-       $request->validate([
-    'nama' => 'required', // Ganti 'name' menjadi 'nama' agar sesuai dengan form
-    'nomor_telepon' => 'required',
-    'biodata' => 'nullable',
-        ]);
+{
+    // 1. Validasi data yang masuk
+    $request->validate([
+        'nama' => 'required',
+        'nomor_telepon' => 'required',
+        'biodata' => 'nullable',
+    ]);
 
-        // Simpan data ke database
-        // Simpan data ke database
-Contact::create([
-    'name_kontak' => $request->nama,          // Memasukkan input 'nama' ke kolom 'name_kontak'
-    'email'       => $request->nomor_telepon, // Memasukkan input 'nomor_telepon' ke kolom 'email'
-    'message'     => $request->biodata,       // Memasukkan input 'biodata' ke kolom 'message'
-]);
+    // 2. Simpan data ke database
+    \App\Models\Contact::create([
+        'name_kontak' => $request->nama,
+        'email' => $request->nomor_telepon,
+        'message' => $request->biodata,
+    ]);
 
+    // 3. Redirect ke halaman index setelah berhasil simpan
+    return redirect()->route('contacts.index')->with('success', 'Kontak berhasil ditambahkan!');
+}
         // Kembali ke halaman utama contacts dengan pesan sukses
     return redirect()->route('contacts.index')->with('success', 'Kontak berhasil ditambahkan!');
     }
@@ -47,5 +49,30 @@ Contact::create([
     $contact->delete();
 
     return redirect()->route('contacts.index')->with('success', 'Kontak berhasil dihapus!');
+}
+// 4. UPDATE: Menampilkan form edit
+public function edit($id)
+{
+    $contact = \App\Models\Contact::findOrFail($id);
+    return view('contacts.edit', compact('contact'));
+}
+
+// 5. UPDATE: Menyimpan perubahan data
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'nama' => 'required',
+        'nomor_telepon' => 'required',
+        'biodata' => 'nullable',
+    ]);
+
+    $contact = \App\Models\Contact::findOrFail($id);
+    $contact->update([
+        'name_kontak' => $request->nama,
+        'email' => $request->nomor_telepon,
+        'message' => $request->biodata,
+    ]);
+
+    return redirect()->route('contacts.index')->with('success', 'Kontak berhasil diupdate!');
 }
 }
