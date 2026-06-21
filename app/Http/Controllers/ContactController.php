@@ -39,9 +39,7 @@ class ContactController extends Controller
 
     // 3. Redirect ke halaman index setelah berhasil simpan
     return redirect()->route('contacts.index')->with('success', 'Kontak berhasil ditambahkan!');
-}
         // Kembali ke halaman utama contacts dengan pesan sukses
-    return redirect()->route('contacts.index')->with('success', 'Kontak berhasil ditambahkan!');
     }
  public function destroy($id)
 {
