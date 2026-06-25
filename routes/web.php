@@ -2,85 +2,83 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use App\Models\Contact;
+use App\Http\Controllers\ContactController;
 
-// 1. PINTU MASUK UTAMA: Wajib ke halaman Login dulu
-Route::get('/', function () {
-    return redirect('/login');
-});
+Route::get('/', function () { return redirect('/login'); });
 
-// 2. LOGIKA PEMBEDA SETELAH LOGIN (Breeze)
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        if (auth()->user()->role === 'admin') {
-            return redirect('/admin/home'); // Admin langsung dilempar ke Home Admin
+    
+    // --- CRUD E-BOOK ---
+    Route::get('/ebooks', function () {
+        $books = DB::table('ebooks')->get(); 
+        return view('ebooks', compact('books'));
+    })->name('books.index');
+
+    Route::post('/ebooks/store', function (\Illuminate\Http\Request $request) {
+        if (auth()->user()->role !== 'admin') { return redirect('/ebooks'); }
+        $data = ['judul' => $request->judul, 'penulis' => $request->penulis];
+        
+        if ($request->hasFile('image')) {
+            $nama_gambar = time() . '_cover.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('uploads'), $nama_gambar);
+            $data['image_url'] = '/uploads/' . $nama_gambar;
         }
-        return redirect('/home'); // User biasa langsung ke Home web utama
+        if ($request->hasFile('ebook_file')) {
+            $nama_pdf = time() . '_ebook.' . $request->file('ebook_file')->getClientOriginalExtension();
+            $request->file('ebook_file')->move(public_path('books'), $nama_pdf);
+            $data['file_pdf'] = '/books/' . $nama_pdf;
+        }
+        DB::table('ebooks')->insert($data);
+        return redirect('/ebooks');
+    });
+
+    Route::post('/ebooks/{id}/update', function (\Illuminate\Http\Request $request, $id) {
+        if (auth()->user()->role !== 'admin') { return redirect('/ebooks'); }
+        $data_update = ['judul' => $request->judul, 'penulis' => $request->penulis];
+        
+        if ($request->hasFile('image')) {
+            $nama_gambar = time() . '_cover.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(public_path('uploads'), $nama_gambar);
+            $data_update['image_url'] = '/uploads/' . $nama_gambar;
+        }
+        if ($request->hasFile('ebook_file')) {
+            $nama_pdf = time() . '_ebook.' . $request->file('ebook_file')->getClientOriginalExtension();
+            $request->file('ebook_file')->move(public_path('books'), $nama_pdf);
+            $data_update['file_pdf'] = '/books/' . $nama_pdf;
+        }
+        DB::table('ebooks')->where('id_buku', $id)->update($data_update);
+        return redirect('/ebooks');
+    });
+
+    Route::post('/ebooks/{id}/delete', function ($id) {
+        if (auth()->user()->role !== 'admin') { return redirect('/ebooks'); }
+        DB::table('ebooks')->where('id_buku', $id)->delete();
+        return redirect('/ebooks');
+    });
+
+    // --- RUTE HALAMAN LAIN (AGAR TIDAK 404) ---
+    Route::get('/home', function () { return view('home'); })->name('home');
+    Route::get('/about', function () { return view('about'); })->name('about');
+    Route::get('/contact', function () { return view('contact'); })->name('contact');
+
+// Ubah rute dashboard jadi gini:
+    Route::get('/dashboard', function () {
+        return redirect('/home'); // Admin dan User sama-sama ke /home
     })->name('dashboard');
 
-    // ==========================================
-    // 👤 KELOMPOK HALAMAN USER BIASA
-    // ==========================================
-    Route::get('/home', function () { 
-        return view('home'); // File: resources/views/home.blade.php
-    })->name('home');
-
-    Route::get('/about', function () { 
-        return view('about'); // File: resources/views/about.blade.php
-    });
-
-    Route::get('/contact', function () { 
-        return view('contact'); // File: resources/views/contact.blade.php
-    })->name('contact');
-
-    // RUTE PENYELAMAT: Biar form contact.blade.php gak eror saat di-render
-    Route::post('/contact', function () {
-        // Nanti di sini tempat codingan buat nyimpen pesan contact ke database kelompokmu
-        return back()->with('success', 'Pesan berhasil dikirim!');
-    })->name('contact.store');
-
-
-    // ==========================================
-    // 👑 KELOMPOK HALAMAN KHUSUS ADMIN
-    // ==========================================
+// --- UBAH BAGIAN INI ---
     Route::prefix('admin')->group(function () {
-
-        // Home versi Admin
-        Route::get('/home', function () {
-            if (auth()->user()->role !== 'admin') { return redirect('/home'); }
-            
-            return "<h1>👑 HALAMAN HOME ADMIN</h1><p>Halo Admin, di sini kamu bisa mengedit isi materi halaman Home.</p><a href='/home'>Lihat Web User</a>";
+        // Admin sekarang dilempar ke /home, sama kayak User
+        Route::get('/home', function () { return redirect('/home'); });
+        
+        // Halaman Contact Admin tetep aman di sini
+        Route::get('/contact', function () { 
+            return view('admin.contact', ['semua_pesan' => Contact::latest()->get()]); 
         });
-
-        // About versi Admin
-        Route::get('/about', function () {
-            if (auth()->user()->role !== 'admin') { return redirect('/home'); }
-
-            return "<h1>👑 HALAMAN ABOUT ADMIN</h1><p>Di sini tempat admin mengedit profil kelompok / tentang aplikasi.</p>";
-        });
-
-// Contact Admin: Memanggil file view yang ada di folder admin/contact
-        Route::get('/contact', function () {
-            if (auth()->user()->role !== 'admin') { return redirect('/home'); }
-
-            // Ambil data dari Navicat
-            $semua_pesan = Contact::latest()->get(); 
-
-            // Mengarahkan ke file resources/views/admin/contact.blade.php sambil membawa datanya
-            return view('admin.contact', compact('semua_pesan'));
-        });
-
     });
-});
-
-// Bawaan Breeze (Jangan dihapus)
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';
-use App\Http\Controllers\ContactController;
-
 Route::resource('contacts', ContactController::class);

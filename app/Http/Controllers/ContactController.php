@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Contact; // <-- Ini penting untuk memanggil si Asisten Model kita
+use App\Models\Contact;
 
 class ContactController extends Controller
 {
-// 1. READ: Menampilkan semua data kontak
+    // 1. READ: Menampilkan semua data kontak
     public function index()
     {
         $contacts = Contact::all();
-        return view('contacts.index', compact('contacts'));
+        return view('admin.contact', compact('contacts'));
     }
 
     // Menampilkan halaman form tambah kontak
@@ -20,57 +20,57 @@ class ContactController extends Controller
         return view('contacts.create');
     }
 
-    // 2. CREATE: Memproses dan menyimpan data dari form ke database
-    public function store(Request $request)
+public function store(Request $request)
 {
-    // 1. Validasi data yang masuk
     $request->validate([
         'nama' => 'required',
         'nomor_telepon' => 'required',
         'biodata' => 'nullable',
     ]);
 
-    // 2. Simpan data ke database
-    \App\Models\Contact::create([
-        'name_kontak' => $request->nama,
-        'email' => $request->nomor_telepon,
-        'message' => $request->biodata,
-    ]);
+Contact::create([
+    'name'    => $request->nama,          // Ubah 'name_kontak' jadi 'name'
+    'email'   => $request->nomor_telepon, 
+    'message' => $request->biodata,       // Ubah 'message' jika perlu, tapi sepertinya sudah benar
+]);
 
-    // 3. Redirect ke halaman index setelah berhasil simpan
-    return redirect()->route('contacts.index')->with('success', 'Kontak berhasil ditambahkan!');
-        // Kembali ke halaman utama contacts dengan pesan sukses
+    return redirect()->back()->with('success', 'Pesan berhasil dikirim!');
+}
+
+    // 3. DELETE: Hapus data
+    public function destroy($id)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+
+        return redirect()->route('contacts.index')->with('success', 'Kontak berhasil dihapus!');
     }
- public function destroy($id)
-{
-    $contact = \App\Models\Contact::findOrFail($id);
-    $contact->delete();
 
-    return redirect()->route('contacts.index')->with('success', 'Kontak berhasil dihapus!');
-}
-// 4. UPDATE: Menampilkan form edit
-public function edit($id)
-{
-    $contact = \App\Models\Contact::findOrFail($id);
-    return view('contacts.edit', compact('contact'));
-}
+    // 4. EDIT: Menampilkan form edit
+    public function edit($id)
+    {
+        $contact = Contact::findOrFail($id);
+        return view('contacts.edit', compact('contact'));
+    }
 
-// 5. UPDATE: Menyimpan perubahan data
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'nama' => 'required',
-        'nomor_telepon' => 'required',
-        'biodata' => 'nullable',
-    ]);
+    // 5. UPDATE: Menyimpan perubahan data
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'nomor_telepon' => 'required',
+            'biodata' => 'nullable',
+        ]);
 
-    $contact = \App\Models\Contact::findOrFail($id);
-    $contact->update([
-        'name_kontak' => $request->nama,
-        'email' => $request->nomor_telepon,
-        'message' => $request->biodata,
-    ]);
+        $contact = Contact::findOrFail($id);
+        
+        // Ini bagian yang disesuaikan untuk update
+        $contact->update([
+            'name_kontak' => $request->nama,
+            'email'       => $request->nomor_telepon,
+            'message'     => $request->biodata,
+        ]);
 
-    return redirect()->route('contacts.index')->with('success', 'Kontak berhasil diupdate!');
-}
+        return redirect()->route('contacts.index')->with('success', 'Kontak berhasil diupdate!');
+    }
 }

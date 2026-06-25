@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-    // Mengizinkan Laravel mengisi kolom-kolom ini secara otomatis
-   protected $fillable = ['name_kontak', 'email', 'message'];
+    // Ini wajib ada biar gak error 'MassAssignmentException'
+ protected $fillable = ['name', 'email', 'message'];
 }

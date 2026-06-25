@@ -18,7 +18,7 @@
                 📖 BEDAH TEKNOLOGI FRAMEWORK
             </span>
             <h1 class="text-4xl sm:text-5xl font-black tracking-tight mt-6 mb-4 uppercase">
-                Mengenal Lebih Dalam <br>
+                Mengenal singkat <br>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">Sistem Kerja MVC</span>
             </h1>
             <p class="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed mb-6">
