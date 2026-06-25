@@ -28,9 +28,6 @@
                 <a href="/about" class="bg-red-600 hover:bg-red-700 text-white font-black px-8 py-4 rounded-xl shadow-lg shadow-red-600/30 transform hover:-translate-y-1 transition duration-200 text-xs uppercase tracking-wider">
                     Eksplorasi Fitur MVC
                 </a>
-                <a href="/contact" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-black px-8 py-4 rounded-xl transform hover:-translate-y-1 transition duration-200 text-xs uppercase tracking-wider">
-                    Kirim Pesan Database
-                </a>
             </div>
         </div>
     </header>
