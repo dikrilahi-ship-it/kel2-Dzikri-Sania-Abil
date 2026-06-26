@@ -27,7 +27,7 @@ class ContactController extends Controller
     $request->validate([
         'nama' => 'required',
         'nomor_telepon' => 'required',
-        'biodata' => 'nullable',
+        'biodata' => 'required',
     ]);
 
     // 2. Simpan data ke database
