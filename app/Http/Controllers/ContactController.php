@@ -25,7 +25,7 @@ public function store(Request $request)
     $request->validate([
         'nama' => 'required',
         'nomor_telepon' => 'required',
-        'biodata' => 'nullable',
+        'biodata' => 'required',
     ]);
 
 Contact::create([
