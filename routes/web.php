@@ -23,7 +23,7 @@ Route::middleware(['auth'])->group(function () {
         if ($request->hasFile('image')) {
             $nama_gambar = time() . '_cover.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path('uploads'), $nama_gambar);
-            $data['image_url'] = '/uploads/' . $nama_gambar;
+            $data['image'] = '/uploads/' . $nama_gambar;
         }
         if ($request->hasFile('ebook_file')) {
             $nama_pdf = time() . '_ebook.' . $request->file('ebook_file')->getClientOriginalExtension();
@@ -41,20 +41,20 @@ Route::middleware(['auth'])->group(function () {
         if ($request->hasFile('image')) {
             $nama_gambar = time() . '_cover.' . $request->file('image')->getClientOriginalExtension();
             $request->file('image')->move(public_path('uploads'), $nama_gambar);
-            $data_update['image_url'] = '/uploads/' . $nama_gambar;
+            $data_update['image'] = '/uploads/' . $nama_gambar;
         }
         if ($request->hasFile('ebook_file')) {
             $nama_pdf = time() . '_ebook.' . $request->file('ebook_file')->getClientOriginalExtension();
             $request->file('ebook_file')->move(public_path('books'), $nama_pdf);
             $data_update['file_pdf'] = '/books/' . $nama_pdf;
         }
-        DB::table('ebooks')->where('id_buku', $id)->update($data_update);
+        DB::table('ebooks')->where('id', $id)->update($data_update);
         return redirect('/ebooks');
     });
 
     Route::post('/ebooks/{id}/delete', function ($id) {
         if (auth()->user()->role !== 'admin') { return redirect('/ebooks'); }
-        DB::table('ebooks')->where('id_buku', $id)->delete();
+        DB::table('ebooks')->where('id', $id)->delete();
         return redirect('/ebooks');
     });
 
@@ -62,6 +62,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () { return view('home'); })->name('home');
     Route::get('/about', function () { return view('about'); })->name('about');
     Route::get('/contact', function () { return view('contact'); })->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contacts.store'); // <-- tambah di sini
 
 // Ubah rute dashboard jadi gini:
     Route::get('/dashboard', function () {
@@ -81,4 +82,3 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
-Route::resource('contacts', ContactController::class);

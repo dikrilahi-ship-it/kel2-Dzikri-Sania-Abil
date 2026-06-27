@@ -50,7 +50,7 @@
                 <div class="glass bg-slate-800/50 rounded-2xl overflow-hidden shadow-xl flex flex-col justify-between border border-slate-700/50 hover:border-slate-600 transition duration-300">
                     <div>
                         <div class="relative h-48 w-full bg-slate-950 overflow-hidden border-b border-slate-700/50">
-                            <img src="{{ $book->image_url }}" alt="Cover" class="w-full h-full object-cover opacity-85 hover:scale-105 transition duration-500">
+                            <img src="{{ $book->image }}" alt="Cover" class="w-full h-full object-cover opacity-85 hover:scale-105 transition duration-500">
                         </div>
                         <div class="p-5 space-y-2">
                             <h3 class="text-base font-bold text-white tracking-tight">📕 {{ $book->judul }}</h3>
@@ -65,7 +65,7 @@
                                     <button onclick="openEditModal({{ json_encode($book) }})" class="text-center bg-slate-700 hover:bg-amber-500 hover:text-slate-950 text-slate-200 text-xs py-2 rounded-xl font-bold transition cursor-pointer">
                                         ✏️ Edit
                                     </button>
-                                    <form action="/ebooks/{{ $book->id_buku }}/delete" method="POST" onsubmit="return confirm('Yakin mau menghapus buku ini?')">
+                                    <form action="/ebooks/{{ $book->id }}/delete" method="POST" onsubmit="return confirm('Yakin mau menghapus buku ini?')">
                                         @csrf
                                         <button type="submit" class="w-full text-center bg-slate-700 hover:bg-red-600 text-slate-200 text-xs py-2 rounded-xl font-bold transition cursor-pointer">
                                             🗑️ Hapus
@@ -179,7 +179,7 @@
         function openEditModal(book) {
             const formEdit = document.getElementById('form-edit');
             if (formEdit) {
-                formEdit.setAttribute('action', '/ebooks/' + book.id_buku + '/update');
+                formEdit.setAttribute('action', '/ebooks/' + book.id + '/update');
                 document.getElementById('edit-judul').value = book.judul;
                 document.getElementById('edit-penulis').value = book.penulis;
                 toggleModal('modal-edit');

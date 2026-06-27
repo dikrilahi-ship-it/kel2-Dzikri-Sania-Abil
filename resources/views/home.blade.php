@@ -26,7 +26,7 @@
                 Merupakan tugas kuliah Kelompok 2. Di sini kita mengupas tuntas kehebatan ekosistem Laravel sekaligus menyediakan platform simulasi perpustakaan digital E-Book terlengkap untuk menunjang pembelajaran coding kamu!
             </p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#fitur-laravel" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-black px-8 py-4 rounded-xl transform hover:-translate-y-1 transition duration-200 text-xs uppercase tracking-wider">
+                <a href="/about" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-black px-8 py-4 rounded-xl transform hover:-translate-y-1 transition duration-200 text-xs uppercase tracking-wider">
                     Eksplorasi Fitur Laravel
                 </a>
                 <a href="/ebooks" class="bg-gradient-to-r from-red-600 to-amber-500 hover:from-red-700 hover:to-amber-600 text-white font-black px-8 py-4 rounded-xl shadow-lg shadow-red-600/30 transform hover:-translate-y-1 transition duration-200 text-xs uppercase tracking-wider flex items-center gap-2">

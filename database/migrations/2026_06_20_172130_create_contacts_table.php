@@ -9,15 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up(): void
+  public function up(): void
 {
-    Schema::create('contacts', function (Blueprint $table) {
-        $table->id();
-        $table->string('nama');
-        $table->string('nomor_telepon');
-        $table->text('biodata')->nullable(); // nullable artinya boleh dikosongkan
-        $table->timestamps();
-    });
+    // Cek dulu, kalau tabelnya belum ada, baru buat
+    if (!Schema::hasTable('contacts')) {
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('nomor_telepon');
+            $table->text('biodata')->nullable();
+            $table->timestamps();
+        });
+    }
 }
 
     /**
