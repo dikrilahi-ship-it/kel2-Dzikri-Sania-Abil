@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('judul');
             $table->string('penulis');
             $table->string('image')->nullable();
+            $table->string('file_pdf')->nullable();
             $table->timestamps();
         });
     }
