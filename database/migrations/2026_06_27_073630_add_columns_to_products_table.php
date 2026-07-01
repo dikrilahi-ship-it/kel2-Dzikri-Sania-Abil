@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->integer('stock');
-        });
+        // Kolom-kolom ini sudah ditambahkan di migration create_products_table
+        // sehingga migration ini sengaja dikosongkan (no-op) untuk menghindari duplikasi.
     }
 
     /**
@@ -24,8 +20,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn(['name', 'description', 'price', 'stock']);
-        });
+        //
     }
 };
